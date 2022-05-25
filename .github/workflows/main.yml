@@ -21,20 +21,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      # - name: change config.edn and custom.css
-      #   run: cp logseq/config-public.edn logseq/config.edn && cp logseq/custom-public.css logseq/custom.css
       - name: Logseq Publish 🚩
         uses: pengx17/logseq-publish@main
-      # - name: Inject Script
-        # run: sed -i "s@</body>@$( cat logseq/inject.html | tr '\n' ' ' | sed 's@&@\\&@g' )</body>@"  www/index.html
       - name: add a nojekyll file
         run: touch $GITHUB_WORKSPACE/www/.nojekyll
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          repository-name: fishyer/MyLogseq-Publish
-          branch: master # The branch the action should deploy to.
+          branch: gh-pages # The branch the action should deploy to.
           folder: www # The folder the action should deploy.
           clean: true
           single-commit: true
-          token: ${{ secrets.ACCESS_TOKEN }}
